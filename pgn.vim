@@ -16,6 +16,9 @@ endif
 
 syn case ignore
 
+" Delimiters
+syn match pgnDelim "(\|)\|\[\|\]"
+
 " Comment
 syn match pgnComment "^\s*%.*"
 syn match pgnComment ";.*"
@@ -25,7 +28,7 @@ syn region pgnComment start=/{/ end=/}/
 syn region pgnString start=/"/ skip=/\\\\\|\\"/ end=/"/ contained oneline
 
 " Tags
-syn region pgnTag start=/^\s*\[/ end=/\]\s*$/ contains=pgnString oneline
+syn region pgnTag start=/^\s*\[/ end=/\]\s*$/ contains=pgnString,pgnDelim oneline
 
 " Move number
 syn match pgnMoveNumber "[1-9][0-9]*\.\(\.\.\)\="
@@ -38,5 +41,7 @@ hi def link pgnString String
 hi def link pgnTag Keyword
 hi def link pgnMoveNumber Number
 hi def link pgnResult Type
+hi def link pgnDelim Delimiter
 
 let b:current_syntax = "pgn"
+
